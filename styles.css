@@ -52,7 +52,7 @@ h2 {
     margin-bottom:0;
 }
 main > ol.portfolio li > p {
-    font-size:0.6em;
+    font-size:0.8em;
     color:#aaa;
 }
 main > ol li div {
@@ -71,4 +71,8 @@ main ol li.figures figure {
 }
 li.citations {
     font-size:0.8em;
+}
+
+main canvas {
+    max-width:95%;
 }

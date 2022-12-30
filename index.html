@@ -20,7 +20,7 @@
             portfolio) and project. Feel free to add more pages (about etc) and make your index and into page. If
             you do this make a clear portfolio page – this is what we will mark.</p>
         <div>
-            <p>This website is hosted via github pages: https://github.com/albertdiones/test-github-pages</p>
+            <p>This <a href="./">Website</a> is hosted via Github pages</p>
         </div>
     </li>
     <li>
@@ -38,7 +38,29 @@
         <p>Embed two charts of your own design: (a) from a given API, (b) from the same/related
             data saved to your GitHub.</p>
         <div>
-            <p>This website is hosted via github pages: https://github.com/albertdiones/test-github-pages</p>
+            <div class="chartJs">
+                <canvas></canvas>
+                <script type="text/data">
+                    {
+                        "type": "bar",
+                        "data": {
+                          "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                          "datasets": [{
+                            "label": "# of Votes",
+                            "data": [12, 19, 3, 5, 2, 3],
+                            "borderWidth": 1
+                          }]
+                        },
+                        "options": {
+                          "scales": {
+                            "y": {
+                              "beginAtZero": true
+                            }
+                          }
+                        }
+                    }
+                </script>
+            </div>
         </div>
     </li>
     <li>
@@ -96,6 +118,17 @@
         </div>
     </li>
 </ol>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer>
+        document.querySelectorAll('div.chartJs').forEach(
+            function(el) {
+                const ctx = el.querySelector('canvas');
+                const dataEl = el.querySelector('script[type="text/data"]');
+                const data = JSON.parse(dataEl.innerText);
+                new Chart(ctx, data);
+            }
+        );
+    </script>
 </main>
 </body>
 </html>
