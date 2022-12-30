@@ -73,6 +73,7 @@ li.citations {
     font-size:0.8em;
 }
 
-main canvas {
-    max-width:95%;
+main ol.portfolio div.chartJs {
+    display:inline-block;
+    width:30%;
 }

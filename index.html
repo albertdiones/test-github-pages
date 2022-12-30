@@ -69,7 +69,55 @@
             observation, add a series, create a new series); One where the data is “in-line” JSON that you write. This
             second chart need only have 5 or so observations.</p>
         <div>
-            <p>This website is hosted via github pages: https://github.com/albertdiones/test-github-pages</p>
+            <div>
+                <div class="chartJs">
+                    <canvas></canvas>
+                    <script type="text/data">
+                    {
+                        "type": "pie",
+                        "data": {
+                          "labels": ["Male", "Female"],
+                          "datasets": [{
+                            "label": "# of Students Cpe",
+                            "data": [70,30],
+                            "borderWidth": 1
+                          }]
+                        },
+                        "options": {
+                          "scales": {
+                            "y": {
+                              "beginAtZero": true
+                            }
+                          }
+                        }
+                    }
+                    </script>
+                </div>
+
+                <div class="chartJs">
+                    <canvas></canvas>
+                    <script type="text/data">
+                    {
+                        "type": "pie",
+                        "data": {
+                          "labels": ["Male", "Female"],
+                          "datasets": [{
+                            "label": "# of Students Nursing",
+                            "data": [30,70],
+                            "borderWidth": 1
+                          }]
+                        },
+                        "options": {
+                          "scales": {
+                            "y": {
+                              "beginAtZero": true
+                            }
+                          }
+                        }
+                    }
+                    </script>
+                </div>
+            </div>
         </div>
     </li>
     <li>
