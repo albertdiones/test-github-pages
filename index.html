@@ -131,6 +131,11 @@
                 <canvas></canvas>
                 <p>This chart fetches the price from Binance API</p>
                 <script type="text/javascript-function">
+                    async function getCryptoPrice(crypto) {
+                        json = await  fetch('https://api.binance.com/api/v3/ticker/price?symbol=' + crypto + 'USDT')
+                            .then((r) => r.json());
+                        return json.price;
+                    }
                     ( async () => {
                         let cryptoQty = {
                             "BTC": 1.56,
@@ -187,7 +192,51 @@
         <p>Build a chart with data from two separate sources. Plot these data using correlation,
             regression or some other technique.</p>
         <div>
-            <p>This website is hosted via github pages: https://github.com/albertdiones/test-github-pages</p>
+            <div class="table">
+                <h3>Crypto Portfolio $ Value</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>ETA</th>
+                            <th>Weather</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blenhelm Palace</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>Canterbury Cathedral</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <script type="text/javascript" defer>
+                    const table = document.currentScript.previousElementSibling;
+                    const rows = table.querySelectorAll('tbody tr');
+                    const locations = [...rows].map( (row) => row.querySelector('td').innerText );
+
+                    for (let x = 0; x<locations.length; x++) {
+                        const location = locations[x];
+                        const row = rows[x];
+                        const cells = row.querySelectorAll('td');
+                        const weatherCell = cells[2];
+                        (async () =>  weatherCell.innerText = await getWeather(location))();
+                    }
+
+                    async function getWeather(location) {
+                        const apiUrl = "http://api.weatherapi.com/v1/current.json?key=&q="
+                        + location + "&aqi=no";
+
+                        await  fetch(apiUrl)
+                            .then((r) => r.json());
+                        return json.current.condition.text;
+                    }
+                </script>
         </div>
     </li>
     <li>
@@ -208,11 +257,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer>
-        async function getCryptoPrice(crypto) {
-            json = await  fetch('https://api.binance.com/api/v3/ticker/price?symbol=' + crypto + 'USDT')
-                .then((r) => r.json());
-            return json.price;
-        }
         document.querySelectorAll('div.chartJs').forEach(
             async function(el) {
                 const ctx = el.querySelector('canvas');

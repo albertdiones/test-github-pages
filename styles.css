@@ -95,3 +95,18 @@ main ol.portfolio div.chartJs pre code {
     overflow:scroll;
     font-size:0.8em;
 }
+table {
+    width:100%;
+    border:1px solid #ddd;
+    border-spacing:0;
+}
+table tr {
+}
+table tr td:first-child {
+    text-align:center;
+    width:20%;
+}
+table td, table th  {
+    text-align:center;
+    border:1px solid #ddd;
+}
