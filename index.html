@@ -188,7 +188,7 @@
                     <thead>
                         <tr>
                             <th>Location</th>
-                            <th>ETA</th>
+                            <th>ETA/Duration</th>
                             <th>Weather</th>
                         </tr>
                     </thead>
@@ -208,6 +208,16 @@
                             <td>...</td>
                             <td>...</td>
                         </tr>
+                        <tr>
+                            <td>Stonehedge</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>Peak District National Park</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
                     </tbody>
                 </table>
                 <p>This combines data from weatherapi.com and google.com's direction API</p>
@@ -217,13 +227,13 @@
                     const locations = [...rows].map( (row) => row.querySelector('td').innerText );
 
                     for (let x = 0; x<locations.length; x++) {
-                        const location = locations[x];
+                        const location = locations[x] + ', UK';
                         const row = rows[x];
                         const cells = row.querySelectorAll('td');
                         const etaCell = cells[1];
                         const weatherCell = cells[2];
                         (async () =>  etaCell.innerText = await getDrivingEta(location))();
-                        (async () =>  weatherCell.innerText = await getWeather(location))();
+                        (async () =>  weatherCell.innerHTML = await getWeather(location))();
                     }
 
                     async function getWeather(location) {
@@ -234,7 +244,8 @@
 
                         json = await  fetch(apiUrl)
                             .then((r) => r.json());
-                        return json.current.condition.text;
+                        return '<img src="'+ json.current.condition.icon + '" class="weather-icon" /> '
+                            +json.current.condition.text;
                     }
 
                     async function getDrivingEta(location) {

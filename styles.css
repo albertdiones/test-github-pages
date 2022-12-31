@@ -110,3 +110,6 @@ table td, table th  {
     text-align:center;
     border:1px solid #ddd;
 }
+img.weather-icon {
+    max-height:1.5em;
+}
