@@ -224,7 +224,9 @@
                         const location = locations[x];
                         const row = rows[x];
                         const cells = row.querySelectorAll('td');
+                        const etaCell = cells[1];
                         const weatherCell = cells[2];
+                        (async () =>  etaCell.innerText = await getDrivingEta(location))();
                         (async () =>  weatherCell.innerText = await getWeather(location))();
                     }
 
@@ -235,6 +237,17 @@
                         await  fetch(apiUrl)
                             .then((r) => r.json());
                         return json.current.condition.text;
+                    }
+
+                    async function getDrivingEta(location) {
+                        const apiKey = 'AIzaSyBZkcc6D3OmYOsunlNNSyeOx3KGYPLGids';
+                        const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json?destinations='
+                            + location + '&origins=London%2C%20DC&units=metric&key='
+                            + apiKey;
+
+                        await  fetch(apiUrl)
+                            .then((r) => r.json());
+                        return json.rows.duration.text;
                     }
                 </script>
         </div>
