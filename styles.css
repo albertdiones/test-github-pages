@@ -103,6 +103,10 @@ table {
     border:1px solid #ddd;
     border-spacing:0;
 }
+table caption {
+    background:#ccc;
+    padding:0.25em 0;
+}
 table tr {
 }
 table tr td:first-child {
