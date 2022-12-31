@@ -126,11 +126,13 @@
             gain access to.</p>
         <div>
             <div class="chartJs">
+                <h3>Crypto Portfolio $ Value</h3>
                 <canvas></canvas>
+                <p>This chart fetches the price from Binance API</p>
                 <script type="text/javascript-function">
                     ( async () => {
                         let cryptoQty = {
-                            "BTC": 3.56,
+                            "BTC": 1.56,
                             "ETH": 8.12,
                             "XRP": 32234.82
                         };
@@ -145,13 +147,12 @@
                             let price = await  getCryptoPrice(crypto)*qty;
                             cryptoData.push(price);
                         }
-                        console.log(cryptoData);
                         data = {
                             "type": "pie",
                             "data": {
                               labels,
                               "datasets": [{
-                                "label": "My Crypto Portfolio",
+                                "label": "Crypto Value",
                                 data: cryptoData,
                                 "borderWidth": 1
                               }]
