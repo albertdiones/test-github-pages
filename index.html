@@ -1,5 +1,6 @@
 <html lang="en-us">
 <link href="styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
 <body>
 <nav>
     <ol>
@@ -204,6 +205,7 @@
         </div>
     </li>
 </ol>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer>
         async function getCryptoPrice(crypto) {
@@ -218,14 +220,28 @@
                 const dataEl = el.querySelector('script[type="text/data"]');
                 const dataScript = el.querySelector('script[type="text/javascript-function"]');
                 let data;
+                let code;
+                let codeLanguage = 'javascript';
                 if (dataEl) {
+                    code = dataEl.innerText;
                     data = JSON.parse(dataEl.innerText);
+                    codeLanguage = 'json';
                 }
                 else if (dataScript) {
+                    code = dataScript.innerText;
                     await eval(dataScript.innerText);
+                }
+                if (code) {
+                    const firstLineWhiteSpace = code.match(/(?<=\n)\s+(?=\S)/m);
+                    code = code.replaceAll(firstLineWhiteSpace[0],'');
+                    const codeEl = document.createElement('pre');
+                    codeEl.innerHTML = '<code>' + hljs.highlight(code, {language: codeLanguage}).value + '</code>';
+                    el.appendChild(codeEl);
                 }
 
                 new Chart(ctx, data);
+
+
 
             }
         );

@@ -84,3 +84,14 @@ main ol.portfolio div.chartJs {
 main ol.portfolio div.chartJs p {
     color:#888;
 }
+main ol.portfolio div.chartJs pre {
+    text-align:left;
+}
+main ol.portfolio div.chartJs pre code {
+    display:block;
+    background:#dfdfdf;
+    border:1px solid #cfcfcf;
+    padding:0.5em 1em;
+    overflow:scroll;
+    font-size:0.8em;
+}
