@@ -81,7 +81,9 @@ main ol.portfolio div.chartJs {
     width:30%;
     text-align:center;
 }
-main ol.portfolio div.chartJs p {
+main ol.portfolio canvas + p,
+main ol.portfolio table + p
+{
     color:#888;
 }
 main ol.portfolio pre {
@@ -94,6 +96,7 @@ main ol.portfolio pre code {
     padding:0.5em 1em;
     overflow:scroll;
     font-size:0.8em;
+    margin:3em 2em;
 }
 table {
     width:100%;
