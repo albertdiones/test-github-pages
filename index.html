@@ -221,6 +221,7 @@
                     </tbody>
                 </table>
                 <p>This combines data from weatherapi.com and google.com's direction API</p>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkcc6D3OmYOsunlNNSyeOx3KGYPLGids"></script>
                 <script type="text/javascript" defer class="expose">
                     const table = document.currentScript.closest('div').querySelector('table');
                     const rows = table.querySelectorAll('tbody tr');
@@ -249,14 +250,18 @@
                     }
 
                     async function getDrivingEta(location) {
-                        const apiKey = 'AIzaSyBZkcc6D3OmYOsunlNNSyeOx3KGYPLGids';
-                        const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json?destinations='
-                            + location + '&origins=London%2C%20DC&units=metric&key='
-                            + apiKey;
-
-                        json = await  fetch(apiUrl)
-                            .then((r) => r.json());
-                        return json.rows.duration.text;
+                        const service = new google.maps.DistanceMatrixService();
+                        json = await service.getDistanceMatrix(
+                            {
+                                origins: ['London'],
+                                destinations: [ location ],
+                                travelMode: 'DRIVING'
+                            },
+                            (json) => {
+                                //console.log(json);
+                            }
+                        );
+                        return json.rows[0]?.elements[0]?.duration.text;
                     }
                 </script>
         </div>
