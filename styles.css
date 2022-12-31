@@ -84,10 +84,10 @@ main ol.portfolio div.chartJs {
 main ol.portfolio div.chartJs p {
     color:#888;
 }
-main ol.portfolio div.chartJs pre {
+main ol.portfolio pre {
     text-align:left;
 }
-main ol.portfolio div.chartJs pre code {
+main ol.portfolio pre code {
     display:block;
     background:#dfdfdf;
     border:1px solid #cfcfcf;

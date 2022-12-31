@@ -216,7 +216,7 @@
                     </tbody>
                 </table>
                 <p>This combines data from weatherapi.com and google.com's direction API</p>
-                <script type="text/javascript" defer>
+                <script type="text/javascript" defer class="expose">
                     const table = document.currentScript.previousElementSibling;
                     const rows = table.querySelectorAll('tbody tr');
                     const locations = [...rows].map( (row) => row.querySelector('td').innerText );
@@ -233,7 +233,7 @@
 
                     async function getWeather(location) {
                         const apiKey = '568507c821cc4c5997352427220107';
-                        const apiUrl = "http://api.weatherapi.com/v1/current.json?key='
+                        const apiUrl = 'http://api.weatherapi.com/v1/current.json?key='
                         + apiKey
                         + '&q=' + location + '&aqi=no';
 
@@ -292,17 +292,29 @@
                     await eval(dataScript.innerText);
                 }
                 if (code) {
-                    const firstLineWhiteSpace = code.match(/(?<=\n)\s+(?=\S)/m);
-                    code = code.replaceAll(firstLineWhiteSpace[0],'');
-                    const codeEl = document.createElement('pre');
-                    codeEl.innerHTML = '<code>' + hljs.highlight(code, {language: codeLanguage}).value + '</code>';
-                    el.appendChild(codeEl);
+                    exposeCode(code, codeLanguage, el);
                 }
 
                 new Chart(ctx, data);
+            }
+        );
 
 
+        function exposeCode(code, language, parentEl) {
+            const firstLineWhiteSpace = code.match(/(?<=\n)\s+(?=\S)/m);
+            code = code.replaceAll(firstLineWhiteSpace[0],'');
+            const codeEl = document.createElement('pre');
+            codeEl.innerHTML = '<code>' + hljs.highlight(code, {language}).value + '</code>';
+            parentEl.appendChild(codeEl);
+        }
 
+        document.querySelectorAll('script.expose').forEach(
+            (el) => {
+                exposeCode(
+                    el.innerText,
+                    'javascript',
+                    el.closest('div')
+                );
             }
         );
     </script>
