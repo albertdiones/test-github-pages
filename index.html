@@ -254,7 +254,7 @@
                             + location + '&origins=London%2C%20DC&units=metric&key='
                             + apiKey;
 
-                        json = await  fetch(apiUrl, { mode: 'no-cors'})
+                        json = await  fetch(apiUrl)
                             .then((r) => r.json());
                         return json.rows.duration.text;
                     }
